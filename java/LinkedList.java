@@ -35,6 +35,39 @@ public class LinkedList{
 	}
 
 	public void add(String item, int index){
+
+		if(index  < 0 || index > N){
+			throw new IllegalArgumentException("Invalid index: "+index);
+		}
+
+		if(index == 0){
+			add(item);
+			return;
+		}
+
+		Node prev = null;
+		Node curr = null;
+		int i = 1;
+		for(prev = first, curr = first.next; curr != null; i++){
+			if(i == index){
+				break;
+			}
+			prev = curr;
+			curr = curr.next;
+		}
+		Node n  = new Node(item);
+		if(curr == null){ // end
+			n.next = null;
+			prev.next = n;
+		}else{
+			prev.next = n;
+			n.next = curr;
+		}
+		N++;
+	}
+
+/**
+	public void add(String item, int index){
 		Node n = new Node(item);
 		if(index < 0 || index > N){
 			throw new IllegalArgumentException("Invalid index");
@@ -44,10 +77,10 @@ public class LinkedList{
 			return;
 		}
 		if(index == N){
-			//Node oldLast = last;
-			//last = n;
 			last.next = n;
 			n.next = null;
+			last = n;
+			N++;
 			return;
 		}
 		int i=1;
@@ -64,9 +97,13 @@ public class LinkedList{
 			curr = curr.next;
 		}
 	}
-
+**/	
 	public int size(){
 		return N;
+	}
+
+	public boolean isEmpty(){
+		return N==0;
 	}
 
 	public String remove(int index){
@@ -143,37 +180,40 @@ public class LinkedList{
 	public static void main(String s[]) throws Exception{
 		LinkedList l = new LinkedList();
 
-		l.add("H");
-		l.add("E");
-		l.add("L");
-		l.add("L");
-		l.add("O");
+//		l.add("H");
+//		l.add("E");
+//		l.add("L");
+//		l.add("L");
+//		l.add("O");
 		//l.remove();	
 		//l.remove();
 		//l.add("n");
 		//l.add("a");
-		l.traverse();		
+//		l.traverse();		
 		//l.remove("H");
 		//l.remove("L")
-		l.add(" ");
+//		l.add(" ");
 		l.add("W",0);
-		l.add("O",0);
-		l.add("R",2);
+		System.out.println("-> "+ l.size());
+		l.add("O",1);
+		System.out.println("-> "+ l.size());
+		l.add("R",1);
+		System.out.println("-> "+ l.size());
 		//l.traverse();
 		//l.remove(1);
 		//l.traverse();
 		//l.remove(2);
 		l.traverse();
-		l.remove(6);
-		l.traverse();
-		l.remove(6);
-		l.traverse();
+	//	l.remove(6);
+	//	l.traverse();
+	//	l.remove(6);
+	//	l.traverse();
 //		System.out.println("-> "+ l.size());
-		l.remove(6);
-		l.traverse();
+	//	l.remove(6);
+	//	l.traverse();
 //		System.out.println("-> "+ l.size());
-		l.remove(5);
-		l.traverse();
+	//	l.remove(5);
+	//	l.traverse();
 	}
 
 }
