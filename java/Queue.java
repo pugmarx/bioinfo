@@ -7,7 +7,7 @@ public class Queue{
 		l = new LinkedList();
 	}
 
-	public void add(String item){
+	public void enqueue(String item){
 		if(l.isEmpty()){
 			l.add(item);
 			return;
@@ -15,7 +15,7 @@ public class Queue{
 		l.add(item);
 	}
 
-	public String remove(){
+	public String dequeue(){
 		if(l.isEmpty()){
 			return null;
 		}
@@ -37,19 +37,19 @@ public class Queue{
 
 	public static void main(String a[]) throws Exception{
 		Queue q = new Queue();
-		q.add("a");
+		q.enqueue("a");
 		System.out.println(q.size());
-		q.add("b");
+		q.enqueue("b");
 		System.out.println(q.size());
-		q.add("c");
+		q.enqueue("c");
 		System.out.println(q.size());
-		q.add("c");
+		q.enqueue("c");
 		System.out.println(q.size());
 		q.print();
-		System.out.println(q.remove());
-		System.out.println(q.remove());
-		System.out.println(q.remove());
-		System.out.println(q.remove());
+		System.out.println(q.dequeue());
+		System.out.println(q.dequeue());
+		System.out.println(q.dequeue());
+		System.out.println(q.dequeue());
 		
 	}
 }
