@@ -21,7 +21,7 @@ public class Queue{
 		}
 		return l.remove(l.size()-1);
 	}
-	
+
 
 	public boolean isEmpty(){
 		return l.isEmpty();
@@ -50,6 +50,5 @@ public class Queue{
 		System.out.println(q.dequeue());
 		System.out.println(q.dequeue());
 		System.out.println(q.dequeue());
-		
 	}
 }
