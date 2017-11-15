@@ -74,47 +74,49 @@ public class LinkedList {
       return(N);
    }
 
-	/**
-	Finds the middle element in the case of Odd number of elements, and second middle element in
-	the case of Even number of elements. Uses 2 pointers to achieve the same, second one (fast ptr)
-	is two elements ahead of the first one (slow ptr).
-	**/
-	public Node findMid(){
-		if(N == 1) return first;
-	
-		Node n, m;		
-      for (n = first, m=first; m != null && m.next != null; n = n.next) {
-		m = n.next.next;
+   /**
+    * Finds the middle element in the case of Odd number of elements, and second middle element in
+    * the case of Even number of elements. Uses 2 pointers to achieve the same, second one (fast ptr)
+    * is two elements ahead of the first one (slow ptr).
+    **/
+   public Node findMid() {
+      if (N == 1) {
+         return(first);
       }
-		
-       // System.out.println(String.format("Mid: %s ", n.item));
-		return n;		
-	}
 
-	
-	/**
-	Checks if the passed list has a loop. This is done by maintaining a list of all viisted nodes.
-	If a visited node is found in the set, this implies that it has already been visited, and hence
-	there'd be a cycle!!
-	**/
+      Node n, m;
+      for (n = first, m = first; m != null&& m.next != null; n = n.next) {
+         m = n.next.next;
+      }
 
-	public static boolean hasLoop(Node head){
-		Set<Node> nodes = new HashSet<>(); 
-         for(Node n = head; n != null; n = n.next){
-             
-             if(nodes.contains(n)) return true;
-             
-             nodes.add(n);
+      // System.out.println(String.format("Mid: %s ", n.item));
+      return(n);
+   }
+
+   /**
+    * Checks if the passed list has a loop. This is done by maintaining a list of all viisted nodes.
+    * If a visited node is found in the set, this implies that it has already been visited, and hence
+    * there'd be a cycle!!
+    **/
+
+   public static boolean hasLoop(Node head) {
+      Set <Node> nodes = new HashSet <>();
+      for (Node n = head; n != null; n = n.next) {
+         if (nodes.contains(n)) {
+            return(true);
          }
-		return false;
 
-	}
+         nodes.add(n);
+      }
+      return(false);
+   }
 
-	public boolean hasLoop(){
-		if(N==1) return false;
-		return hasLoop(first);
-	}
-
+   public boolean hasLoop() {
+      if (N == 1) {
+         return(false);
+      }
+      return(hasLoop(first));
+   }
 
    public boolean isEmpty() {
       return(N == 0);
@@ -218,7 +220,7 @@ public class LinkedList {
       //l.traverse();
       //l.remove(2);
       l.traverse();
-		l.findMid();
+      l.findMid();
       //	l.remove(6);
       //	l.traverse();
       //	l.remove(6);
@@ -230,19 +232,18 @@ public class LinkedList {
       //	l.remove(5);
       //	l.traverse();
 
-		Node a = new Node("a");
-		Node b = new Node("b");
-		a.next = b;
-		Node c = new Node("c");
-		b.next = c;
-		Node d = new Node("d");
-		c.next = d;
-		Node e = new Node("e");
-		d.next = e;
+      Node a = new Node("a");
+      Node b = new Node("b");
+      a.next = b;
+      Node c = new Node("c");
+      b.next = c;
+      Node d = new Node("d");
+      c.next = d;
+      Node e = new Node("e");
+      d.next = e;
 //		e.next = c; // loop
-		e.next = null;
+      e.next = null;
 
-		System.out.println(hasLoop(a));
-
+      System.out.println(hasLoop(a));
    }
 }
