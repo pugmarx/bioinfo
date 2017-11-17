@@ -5,24 +5,24 @@ import java.util.*;
  *      n -> n+1 ---> n+k
  **/
 
-class Node {
-   String item;
+class Node <Item> {
+   Item item;
    Node next;
    public Node() {
    }
 
-   public Node(String item) {
+   public Node(Item item) {
       this.item = item;
    }
 }
 
-public class LinkedList {
+public class LinkedList <Item> {
    Node first;
    Node last;
    private int N = 0;
 
-   public void add(String item) {
-      Node node = new Node();
+   public void add(Item item) {
+      Node <Item> node = new Node <>();
 
       node.item = item;
       if (N == 0) {
@@ -38,7 +38,7 @@ public class LinkedList {
       N++;
    }
 
-   public void add(String item, int index) {
+   public void add(Item item, int index) {
       if (index < 0 || index > N) {
          throw new IllegalArgumentException("Invalid index: " + index);
       }
@@ -122,7 +122,7 @@ public class LinkedList {
       return(N == 0);
    }
 
-   public String remove(int index) {
+   public Item remove(int index) {
       if (index < 0 || index > (N - 1)) {
          throw new IllegalArgumentException("Invalid index: " + index);
       }
@@ -138,7 +138,7 @@ public class LinkedList {
             prev.next = curr.next;
             //n.next = curr;
             N--;
-            return(curr.item);
+            return((Item)(curr.item));
             //break;
          }
          prev = curr;
@@ -147,7 +147,7 @@ public class LinkedList {
       return(null);
    }
 
-   public String remove() {
+   public Item remove() {
       if (N < 1) {
          return(null);
       }
@@ -155,17 +155,17 @@ public class LinkedList {
          N--;
          Node temp = first;
          first = null;
-         return(temp.item);
+         return((Item)(temp.item));
       }
       else{
          N--;
          Node oldFirst = first;
          first = oldFirst.next;
-         return(oldFirst.item);
+         return((Item)(oldFirst.item));
       }
    }
 
-   public void remove(String item) {
+   public void remove(Item item) {
       if (first.item.equals(item)) {
          remove();
          return;
@@ -194,7 +194,7 @@ public class LinkedList {
    }
 
    public static void main(String s[]) throws Exception {
-      LinkedList l = new LinkedList();
+      LinkedList <String> l = new LinkedList <>();
 
 //		l.add("H");
 //		l.add("E");

@@ -13,19 +13,19 @@
  *      }
  * }
  **/
-public class Stack {
-   LinkedList l = new LinkedList();
+public class Stack <T> {
+   LinkedList <T> l;
 
    public Stack() {
-      l = new LinkedList();
+      l = new LinkedList <T>();
    }
 
-   public void push(String item) {
+   public void push(T item) {
       l.add(item);
    }
 
-   public String pop() {
-      return(l.remove());
+   public T pop() {
+      return((T)(l.remove()));
    }
 
    public boolean isEmpty() {
@@ -36,17 +36,24 @@ public class Stack {
       l.traverse();
    }
 
-   public static void main(String a[]) throws Exception {
-      Stack s = new Stack();
+   public static void main(String args[]) throws Exception {
+      Stack <String> s = new Stack <>();
 
-      s.push("a");
+      for (String a: args) {
+         if (a.equals("-")) {
+            s.pop();
+         }
+         else{
+            s.push(a);
+         }
+      }
 //		s.push("b");
 //		s.push("c");
 //		s.push("d");
       s.print();
-      System.out.println(s.pop());
-      System.out.println(s.pop());
-      s.print();
+      // System.out.println(s.pop());
+      // System.out.println(s.pop());
+      //s.print();
 //		System.out.println(s.pop());
       //System.out.println(s.pop());
       //	System.out.println(s.pop());

@@ -1,16 +1,16 @@
 import java.util.Scanner;
 
-public class FixedCapacityStack {
+public class FixedCapacityStack <T> {
    int size;
    int capacity;
-   Stack stack;
+   Stack <T> stack;
 
    public FixedCapacityStack(int capacity) {
       this.capacity = capacity;
-      stack         = new Stack();
+      stack         = new Stack <T>();
    }
 
-   public void push(String item) {
+   public void push(T item) {
       if (size == capacity) {
          pop();
       }
@@ -18,7 +18,7 @@ public class FixedCapacityStack {
       stack.push(item);
    }
 
-   public String pop() {
+   public T pop() {
       if (size > 0) {
          size--;
       }
@@ -34,8 +34,8 @@ public class FixedCapacityStack {
    }
 
    public static void main(String s[]) throws Exception {
-      FixedCapacityStack fcs = new FixedCapacityStack(6);
-      Scanner            sc  = new Scanner(System.in);
+      FixedCapacityStack <String> fcs = new FixedCapacityStack <>(6);
+      Scanner sc = new Scanner(System.in);
 
       while (sc.hasNext()) {
          String w = sc.next();

@@ -14,6 +14,14 @@ public class ArrayFCStack <T> {
       arr           = (T[])new Object[capacity];
    }
 
+   public boolean isEmpty() {
+      return(size == 0);
+   }
+
+   public boolean isFull() {
+      return(size == capacity);
+   }
+
    private void resizeArray(int toSize) {
       T[] newArray = (T[])new Object[toSize];
       for (int i = 0; i < size; i++) {
@@ -32,12 +40,14 @@ public class ArrayFCStack <T> {
 
    // Halve the size if array is half empty
    public T pop() {
-      if (size <= capacity / 2) {
+      if (size <= capacity / 4) {
          resizeArray(capacity / 2);
       }
-      T tmp = arr[--size];
-      arr[size] = null;
-
+      T tmp = null;
+      if (size > 0) {
+         tmp       = arr[--size];
+         arr[size] = null;
+      }
       return(tmp);
    }
 
