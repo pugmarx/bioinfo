@@ -24,6 +24,10 @@ public class Stack <T> {
       l.add(item);
    }
 
+	//public T peek(){
+		
+	//}
+
    public T pop() {
       return((T)(l.remove()));
    }
