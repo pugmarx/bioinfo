@@ -16,10 +16,30 @@ class Node <Item> {
    }
 }
 
+@SuppressWarnings("unchecked")
 public class LinkedList <Item> {
    Node first;
    Node last;
    private int N = 0;
+
+// FIXME
+   public Node reverse() {
+      Node reverse = null;
+      int  i       = 0;
+
+      for (Node n = first; n != null; n = n.next) {
+         if (i == 0) {
+            reverse      = new Node(n.item);
+            reverse.next = null;
+            i++;
+         }
+         Node r = new Node(n.item);
+         Node t = reverse;
+         reverse = r;
+         r.next  = t;
+      }
+      return(reverse);
+   }
 
    public void add(Item item) {
       Node <Item> node = new Node <>();
@@ -98,7 +118,6 @@ public class LinkedList <Item> {
     * If a visited node is found in the set, this implies that it has already been visited, and hence
     * there'd be a cycle!!
     **/
-
    public static boolean hasLoop(Node head) {
       Set <Node> nodes = new HashSet <>();
       for (Node n = head; n != null; n = n.next) {
@@ -109,6 +128,43 @@ public class LinkedList <Item> {
          nodes.add(n);
       }
       return(false);
+   }
+
+   /**
+    *      Finds the max within the list (assuming all positive integers)
+    **/
+   public int max() {
+      if (N == 0) {
+         return(-1);
+      }
+      try{
+         Integer.valueOf((int)first.item);
+      }catch (Exception e) {
+         throw new UnsupportedOperationException("unsuppored operation: max");
+      }
+      int max = -1;
+      for (Node n = first; n != null; n = n.next) {
+         //System.out.print(String.format("| %s ", n.item));
+         if ((int)n.item > max) {
+            max = (int)n.item;
+         }
+      }
+      return(max);
+   }
+
+   //int max = 0;
+   public int checkMax(Node n, int maxSoFar) {
+      if (n == null) {
+         if ((int)n.item > maxSoFar) {
+            maxSoFar = (int)n.item;
+         }
+         checkMax(n.next, maxSoFar);
+      }
+      return(maxSoFar);
+   }
+
+   public int maxR() {
+      return(checkMax(first, 0));
    }
 
    public boolean hasLoop() {
@@ -187,65 +243,47 @@ public class LinkedList <Item> {
    }
 
    public void traverse() {
-      for (Node n = first; n != null; n = n.next) {
+      traverse(first);
+   }
+
+   public static void traverse(Node start) {
+      for (Node n = start; n != null; n = n.next) {
          System.out.print(String.format("| %s ", n.item));
       }
       System.out.println();
    }
 
    public static void main(String s[]) throws Exception {
-      LinkedList <String> l = new LinkedList <>();
+      //LinkedList <String> l = new LinkedList <>();
+      LinkedList <Integer> l = new LinkedList <>();
+      l.add(1);
+      l.add(2);
+      l.add(4);
 
-//		l.add("H");
-//		l.add("E");
-//		l.add("L");
-//		l.add("L");
-//		l.add("O");
-      //l.remove();
-      //l.remove();
-      //l.add("n");
-      //l.add("a");
-//		l.traverse();
-      //l.remove("H");
-      //l.remove("L")
-//		l.add(" ");
-      l.add("W", 0);
-      System.out.println("-> " + l.size());
-      l.add("O", 1);
-      System.out.println("-> " + l.size());
-      l.add("R", 1);
-      System.out.println("-> " + l.size());
-      l.add("L", 1);
-      System.out.println("-> " + l.size());
-      //l.traverse();
-      //l.remove(1);
-      //l.traverse();
-      //l.remove(2);
       l.traverse();
-      l.findMid();
-      //	l.remove(6);
-      //	l.traverse();
-      //	l.remove(6);
-      //	l.traverse();
-//		System.out.println("-> "+ l.size());
-      //	l.remove(6);
-      //	l.traverse();
-//		System.out.println("-> "+ l.size());
-      //	l.remove(5);
-      //	l.traverse();
+      System.out.println("max: " + l.max());
+      l.add(5);
+      l.traverse();
+      System.out.println("maxR: " + l.max());
 
-      Node a = new Node("a");
-      Node b = new Node("b");
-      a.next = b;
-      Node c = new Node("c");
-      b.next = c;
-      Node d = new Node("d");
-      c.next = d;
-      Node e = new Node("e");
-      d.next = e;
-//		e.next = c; // loop
-      e.next = null;
+      Node r = l.reverse();
+      traverse(r);
 
-      System.out.println(hasLoop(a));
+/*
+ *
+ *    Node a = new Node("a");
+ *    Node b = new Node("b");
+ *    a.next = b;
+ *    Node c = new Node("c");
+ *    b.next = c;
+ *    Node d = new Node("d");
+ *    c.next = d;
+ *    Node e = new Node("e");
+ *    d.next = e;
+ * //		e.next = c; // loop
+ *    e.next = null;
+ *
+ *    System.out.println(hasLoop(a));
+ */
    }
 }
