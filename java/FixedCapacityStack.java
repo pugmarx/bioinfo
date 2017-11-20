@@ -22,7 +22,7 @@ public class FixedCapacityStack {
       if (size > 0) {
          size--;
       }
-      return(stack.pop());
+      return((String)stack.pop());
    }
 
    public int getSize() {

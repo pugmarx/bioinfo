@@ -19,7 +19,7 @@ public class Queue{
 		if(l.isEmpty()){
 			return null;
 		}
-		return l.remove(l.size()-1);
+		return (String)l.remove(l.size()-1);
 	}
 
 
