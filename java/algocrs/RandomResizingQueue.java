@@ -5,7 +5,7 @@ import java.util.*;
  **/
 
 @SuppressWarnings("unchecked")
-public class RandomResizingQueue <T> implements Iterable<T> {
+public class RandomResizingQueue <T> implements Iterable <T> {
    private T[] arr;
    private int N;
    private int head;
@@ -53,7 +53,7 @@ public class RandomResizingQueue <T> implements Iterable<T> {
       }
       T tmp = null;
       if (N > 0) {
-		randomSwap();
+         randomSwap();
          tmp = arr[head];
          shiftLeft();
          arr[--N] = null;
@@ -61,46 +61,52 @@ public class RandomResizingQueue <T> implements Iterable<T> {
       return(tmp);
    }
 
-	private void randomSwap(){
-		Random rand = new Random();
-		int randomIndex = rand.nextInt(N);
-		
-		T tmp = arr[randomIndex];
-		arr[randomIndex] = arr[0];
-		arr[0]=tmp;
-	}
+   private void randomSwap() {
+      Random rand        = new Random();
+      int    randomIndex = rand.nextInt(N);
 
-	public Iterator<T> iterator(){
-		return new QueueIterator();
-	}
+      T tmp = arr[randomIndex];
 
-	private class QueueIterator implements Iterator<T>{
-		private int current = 0;
-		private T[] a;
-		public QueueIterator(){
-			a = (T[]) new Object[N];
-			shuffle(arr);
-		}
-		private void shuffle(T[] arr){
-			Random r = new Random();
-			a = Arrays.copyOf(arr, N-1);
-			for(int i=0;i<N-1;i++){
-				int rNum = r.nextInt(N-1);
-				T tmp = a[i];
-				a[i] = a[rNum];
-				a[rNum] = tmp;
-			}
-		}
-		public boolean hasNext(){
-			return current < a.length;
-		}
-		public void remove(){
-			throw new UnsupportedOperationException();
-		}
-		public T next(){
-			return a[current++];		
-		}
-	}
+      arr[randomIndex] = arr[0];
+      arr[0]           = tmp;
+   }
+
+   public Iterator <T> iterator() {
+      return(new QueueIterator());
+   }
+
+   private class QueueIterator implements Iterator <T> {
+      private int current = 0;
+      private T[] a;
+      public QueueIterator() {
+         a = (T[])new Object[N];
+         shuffle(arr);
+      }
+
+      private void shuffle(T[] arr) {
+         Random r = new Random();
+
+         a = Arrays.copyOf(arr, N - 1);
+         for (int i = 0; i < N - 1; i++) {
+            int rNum = r.nextInt(N - 1);
+            T   tmp  = a[i];
+            a[i]    = a[rNum];
+            a[rNum] = tmp;
+         }
+      }
+
+      public boolean hasNext() {
+         return(current < a.length);
+      }
+
+      public void remove() {
+         throw new UnsupportedOperationException();
+      }
+
+      public T next() {
+         return(a[current++]);
+      }
+   }
 
    private void shiftLeft() {
       for (int i = 0; i < N - 1; i++) {
@@ -133,38 +139,38 @@ public class RandomResizingQueue <T> implements Iterable<T> {
       afcs.enqueue("e");
       afcs.print();
       afcs.enqueue("f");
-/*      afcs.print();
-      afcs.dequeue();
-      afcs.print();
-      afcs.dequeue();
-//		afcs.pop();
-//		afcs.pop();
-//		System.out.println(afcs.peek());
-      afcs.print();
-      afcs.dequeue();
-      afcs.print();
-      afcs.dequeue();
-      afcs.print();
-      afcs.dequeue();
-      afcs.print();
-      afcs.dequeue();
-      afcs.print();
-      afcs.dequeue();
-      afcs.print();
-      afcs.dequeue();
-      afcs.print();
-      afcs.dequeue();
-      afcs.print();
-      afcs.dequeue();
-//		afcs.pop();
-//		afcs.pop();
-//		System.out.println(afcs.peek());
-      afcs.print();
-*/
-		for(String s : afcs){
-			System.out.print( s+ " |");
-		}
-		System.out.println();
 
+/*      afcs.print();
+ *    afcs.dequeue();
+ *    afcs.print();
+ *    afcs.dequeue();
+ * //		afcs.pop();
+ * //		afcs.pop();
+ * //		System.out.println(afcs.peek());
+ *    afcs.print();
+ *    afcs.dequeue();
+ *    afcs.print();
+ *    afcs.dequeue();
+ *    afcs.print();
+ *    afcs.dequeue();
+ *    afcs.print();
+ *    afcs.dequeue();
+ *    afcs.print();
+ *    afcs.dequeue();
+ *    afcs.print();
+ *    afcs.dequeue();
+ *    afcs.print();
+ *    afcs.dequeue();
+ *    afcs.print();
+ *    afcs.dequeue();
+ * //		afcs.pop();
+ * //		afcs.pop();
+ * //		System.out.println(afcs.peek());
+ *    afcs.print();
+ */
+      for (String s : afcs) {
+         System.out.print(s + " |");
+      }
+      System.out.println();
    }
 }

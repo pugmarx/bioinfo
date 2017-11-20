@@ -22,9 +22,9 @@ public class ArrayFCStack <T> {
       return(size == capacity);
    }
 
-	public T peek(){
-		return arr[size-1];
-	}
+   public T peek() {
+      return(arr[size - 1]);
+   }
 
    private void resizeArray(int toSize) {
       T[] newArray = (T[])new Object[toSize];
@@ -77,7 +77,7 @@ public class ArrayFCStack <T> {
       afcs.pop();
 //		afcs.pop();
 //		afcs.pop();
-		System.out.println(afcs.peek());
+      System.out.println(afcs.peek());
       afcs.print();
    }
 }

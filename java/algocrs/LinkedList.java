@@ -22,8 +22,8 @@ public class LinkedList <Item> {
    Node last;
    private int N = 0;
 
-// FIXME
-   public Node reverse() {
+   // FIXME - unoptimized. space req = 2*N (size of the LL)
+   public Node reverseExp() {
       Node reverse = null;
       int  i       = 0;
 
@@ -37,6 +37,30 @@ public class LinkedList <Item> {
          Node t = reverse;
          reverse = r;
          r.next  = t;
+      }
+      return(reverse);
+   }
+
+   public Node reverse() {
+      return(reverse(first));
+   }
+
+   /**
+    * Optimized - Destructive implementation for reversing the list
+    * From the algo book:
+    *  We maintain the invariant that first is the first node of what’s left of the original
+    * list, second is the second node of what’s left of the original list, and reverse is the first
+    * node of the resulting reversed list.
+    **/
+   public static Node reverse(Node h) {
+      Node first   = h;
+      Node reverse = null;
+      Node second  = null;
+
+      for (first = h; first != null; first = second) {
+         second     = first.next;
+         first.next = reverse;
+         reverse    = first;
       }
       return(reverse);
    }
