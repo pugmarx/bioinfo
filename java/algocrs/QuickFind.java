@@ -5,17 +5,17 @@ import java.util.Scanner;
 public class QuickFind{
 
 	int a[];
-	int sz;
+	int count; // number of individual components
 
 	public QuickFind(int size){
 		_init(size);
 	}
 	
-	public void _init(int sz){
-		if(sz < 1) throw new IllegalArgumentException("invalid size");
-		a = new int[sz];
-		this.sz = sz;
-		for(int i=0;i<sz;i++){
+	public void _init(int N){
+		if(N < 1) throw new IllegalArgumentException("invalid size");
+		a = new int[N];
+		this.count = N;
+		for(int i=0;i<N;i++){
 			a[i]=i; // default	
 		}	
 	}
@@ -24,12 +24,15 @@ public class QuickFind{
 	public void union(int p, int q){
 		int valP = find(p);
 		int valQ = find(q);
-		a[q] = valP;
+		
+		if(valP == valQ) return; // nothing to be done
+		//a[q] = valP;
 		for(int i=0;i<a.length;i++){
 			if(a[i] == valQ){
 				a[i] = valP;
 			}	
-		}					
+		}
+		count--;					
 	}
 
 	// Returns index of p
@@ -37,16 +40,21 @@ public class QuickFind{
 		return a[p];
 	}
 
+	public int getCount(){
+		return count;
+	}
+
 	public void print(){
 		for(int i=0;i<a.length;i++){
 			System.out.print(a[i] + "|");
 		}
 		System.out.println();
+		System.out.println("Count: "+count);
 	}
 
 	// Indicates whether p and q are connected
 	public boolean connected(int p, int q){
-		if(p > (sz-1) || q > (sz-1)){
+		if(p > (a.length - 1) || q > (a.length - 1)){
 			return false;
 		}
 		int i = find(p);
