@@ -2,12 +2,12 @@
  Basic QuickFind impl. for Union-Find requirement
 **/
 import java.util.Scanner;
-public class QuickFind implements UnionFind{
+public class QuickUnion implements UnionFind{
 
 	int a[];
 	int count; // number of individual components
 
-	public QuickFind(int size){
+	public QuickUnion(int size){
 		_init(size);
 	}
 	
@@ -20,23 +20,40 @@ public class QuickFind implements UnionFind{
 		}	
 	}
 
-	// Makes union of p and q
+	// Makes union of p and q by assigning the same root to both
 	public void union(int p, int q){
-		int valP = find(p);
-		int valQ = find(q);
+		int rootP = find(p);
+		int rootQ = find(q);
 		
-		if(valP == valQ) return; // nothing to be done
+		//if(valP == valQ) return; // nothing to be done
 		//a[q] = valP;
-		for(int i=0;i<a.length;i++){
-			if(a[i] == valQ){
-				a[i] = valP;
-			}	
-		}
+		//for(int i=0;i<a.length;i++){
+		//	if(a[i] == valQ){
+		//	a[i] = valP;
+		//	}	
+		//}
+
+		//System.out.println("P: "+p+" Q: "+q);
+		//if(a[q] == p) return; // nothing to be done
+		
+		//if(a[p] == p){
+		//	a[p] = q;
+		//}else{
+	//		a[q] = p;
+	//	}
+		//a[q] = p;
+
+		if(rootP == rootQ) return;
+		a[rootQ] = rootP;
 		count--;					
 	}
 
-	// Returns index of p
+	// Returns index of root of p 
 	public int find(int p){
+		while(a[p] != p){
+			p = a[p];
+		}
+
 		return a[p];
 	}
 
@@ -57,13 +74,13 @@ public class QuickFind implements UnionFind{
 		if(p > (a.length - 1) || q > (a.length - 1)){
 			return false;
 		}
-		int i = find(p);
-		int j = find(q);
-		return a[i] == a[j];	
+		int rootP = find(p);
+		int rootQ = find(q);
+		return rootP == rootQ;	
 	}
 
 	public static void main(String s[]){
-		QuickFind q = new QuickFind(Integer.valueOf(s[0]));
+		QuickUnion q = new QuickUnion(Integer.valueOf(s[0]));
 		Scanner sc = new Scanner(System.in);
 		while(sc.hasNext()){
 			
