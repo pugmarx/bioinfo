@@ -10,24 +10,48 @@
 *
 ******************************************************************************/
 
-public class SelectionBars {
-    public static void sort(double[] a) {
-        int n = a.length;
+public class ShellBarsAnim {
+    public static void sort(double[] a) { // Sort a[] into increasing order.
+        int N = a.length;
+        int h = 1;
 
-        for (int i = 0; i < n; i++) {
-            int min = i;
-            for (int j = i + 1; j < n; j++) {
-                if (less(a[j], a[min])) {
-                    min = j;
+        while (h < N / 3) {
+            h = 3 * h + 1;                  // 1, 4, 13, 40, 121, 364, 1093, ...
+        }
+        while (h >= 1) {                    // h-sort the array.
+            for (int i = h; i < N; i++) {   // Insert a[i] among a[i-h], a[i-2*h], a[i-3*h]... .
+                for (int j = i; j >= h && less(a[j], a[j - h]); j -= h) {
+                    show(a, j, j - h);
+                    swap(a, j, j - h);
                 }
             }
-            show(a, i, min);
-            exch(a, i, min);
+            h = h / 3;
         }
     }
 
+/*
+ * public static void sort(double[] a) {
+ *    int n = a.length;
+ *
+ *    for (int i = 0; i < n; i++) {
+ *       int min = i;
+ *       for (int j = i + 1; j < n; j++) {
+ *          if (less(a[j], a[min])) {
+ *             min = j;
+ *          }
+ *       }
+ *       show(a, i, min);
+ *       exch(a, i, min);
+ *    }
+ * }
+ */
     private static void show(double[] a, int i, int min) {
-        StdDraw.setYscale(-a.length + i + 1, i);
+//        StdDraw.setYscale(-a.length + i + 1, i);
+        try{
+            Thread.sleep(1000);
+        }catch (Exception e) {}
+        StdDraw.clear();
+
         StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
         for (int k = 0; k < i; k++) {
             StdDraw.line(k, 0, k, a[k] * 0.6);
@@ -44,7 +68,7 @@ public class SelectionBars {
         return(v < w);
     }
 
-    private static void exch(double[] a, int i, int j) {
+    private static void swap(double[] a, int i, int j) {
         double t = a[i];
 
         a[i] = a[j];

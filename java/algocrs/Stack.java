@@ -14,49 +14,49 @@
  * }
  **/
 public class Stack <T> {
-   LinkedList <T> l;
+    LinkedList <T> l;
 
-   public Stack() {
-      l = new LinkedList <T>();
-   }
+    public Stack() {
+        l = new LinkedList <T>();
+    }
 
-   public void push(T item) {
-      l.add(item);
-   }
+    public void push(T item) {
+        l.add(item);
+    }
 
-   public T pop() {
-      return((T)(l.remove()));
-   }
+    public T pop() {
+        return((T)(l.remove()));
+    }
 
-   public boolean isEmpty() {
-      return(l.size() == 0);
-   }
+    public boolean isEmpty() {
+        return(l.size() == 0);
+    }
 
-   public void print() {
-      l.traverse();
-   }
+    public void print() {
+        l.traverse();
+    }
 
-   public static void main(String args[]) throws Exception {
-      Stack <String> s = new Stack <>();
+    public static void main(String args[]) throws Exception {
+        Stack <String> s = new Stack <>();
 
-      for (String a: args) {
-         if (a.equals("-")) {
-            s.pop();
-         }
-         else{
-            s.push(a);
-         }
-      }
+        for (String a: args) {
+            if (a.equals("-")) {
+                s.pop();
+            }
+            else{
+                s.push(a);
+            }
+        }
 //		s.push("b");
 //		s.push("c");
 //		s.push("d");
-      s.print();
-      // System.out.println(s.pop());
-      // System.out.println(s.pop());
-      //s.print();
+        s.print();
+        // System.out.println(s.pop());
+        // System.out.println(s.pop());
+        //s.print();
 //		System.out.println(s.pop());
-      //System.out.println(s.pop());
-      //	System.out.println(s.pop());
-      //	System.out.println(s.pop());
-   }
+        //System.out.println(s.pop());
+        //	System.out.println(s.pop());
+        //	System.out.println(s.pop());
+    }
 }

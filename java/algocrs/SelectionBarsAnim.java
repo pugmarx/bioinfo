@@ -10,7 +10,7 @@
 *
 ******************************************************************************/
 
-public class SelectionBars {
+public class SelectionBarsAnim {
     public static void sort(double[] a) {
         int n = a.length;
 
@@ -27,7 +27,12 @@ public class SelectionBars {
     }
 
     private static void show(double[] a, int i, int min) {
-        StdDraw.setYscale(-a.length + i + 1, i);
+//        StdDraw.setYscale(-a.length + i + 1, i);
+        try{
+            Thread.sleep(1000);
+        }catch (Exception e) {}
+        StdDraw.clear();
+
         StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
         for (int k = 0; k < i; k++) {
             StdDraw.line(k, 0, k, a[k] * 0.6);
